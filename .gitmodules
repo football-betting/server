@@ -1,0 +1,6 @@
+[submodule "em2021-api"]
+	path = em2021-api
+	url = git@github.com:football-betting/em2021-api.git
+[submodule "tips"]
+	path = tips
+	url = git@github.com:football-betting/tips.git
