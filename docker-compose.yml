@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+    rabbitmq:
+        container_name: football_rabbitmq
+        image: rabbitmq:3.8-management
+        environment:
+            RABBITMQ_DEFAULT_USER: admin
+            RABBITMQ_DEFAULT_PASS: admin
+        ports:
+            - 15672:15672
+            - 5672:5672
+        volumes:
+            - rabbitmq-data:/var/lib/rabbitmq
+    # em2021-api
+    em2021_db:
+        image: mysql:5.7
+        container_name: football_em2021_db
+        environment:
+            MYSQL_ROOT_PASSWORD: admin
+        ports:
+            - 3336:3306
+    em2021_redis:
+        container_name: football_em2021_redis
+        image: redis:6
+        command: redis-server --appendonly yes
+        ports:
+            - 6379:6379
+    em2021_php:
+        container_name: football_em2021_em2021_php
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+        volumes:
+            - ./em2021-api/:/data/
+    em2021_nginx:
+        container_name: football_em2021_em2021_nginx
+        build:
+            context: .
+            dockerfile: docker/nginx/Dockerfile
+        volumes:
+            - ./em2021-api/:/data/
+        ports:
+            - 8000:80
+
+
+    
