@@ -8,41 +8,73 @@ services:
             RABBITMQ_DEFAULT_PASS: admin
         volumes:
             - rabbitmq-data:/var/lib/rabbitmq
-        ports:
-            - 15672:15672
-    # em2021-api
-    em2021_db:
+        networks:
+            - private
+
+    loadbalancer:
+        image: nginx:1.17.8-alpine
+        volumes:
+            - ./docker/nginx/loadbalancer.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            - private
+        depends_on:
+            - api-web
+
+    api-db:
         image: mysql:5.7
         environment:
             MYSQL_ROOT_PASSWORD: admin
         volumes:
             - mysql-data:/var/lib/mysql
-    em2021_redis_api:
+        networks:
+            - api
+    api-redis:
         image: redis:6
         command: redis-server --appendonly yes
         volumes:
             - redis-data-api:/data
-    em2021_redis_tip:
+        networks:
+            - api
+
+    php-fpm:
+        image: registry.gitlab.nxs360.com/docker/php:7.4-fpm
+        volumes:
+            - ./em2021-api/:/data-api/
+            - ./tips/:/data-tips/
+        networks:
+            - default
+            - api
+            - tip
+
+    api-web:
+        image: nginx:1.17.8-alpine
+        volumes:
+            - ./em2021-api/:/data-api/
+            - ./docker/nginx/vhost-api.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            api:
+            private:
+                aliases:
+                    - web.api
+        depends_on:
+            - api-db
+            - api-redis
+            - php-fpm
+            - rabbitmq
+
+    redis_tip:
         image: redis:6
         command: redis-server --appendonly yes
         volumes:
             - redis-data-tip:/data
-    em2021_php:
-        image: registry.gitlab.nxs360.com/docker/php:7.4-fpm
-        volumes:
-            - ./em2021-api/:/data/
-    em2021_nginx:
-        image: nginx:1.17.8-alpine
-        volumes:
-            - ./em2021-api/:/data/
-            - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
-            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-        ports:
-            - 8000:80
 
 volumes:
     rabbitmq-data:
     mysql-data:
     redis-data-api:
     redis-data-tip:
-    
+
+networks:
+    api:
+    tip:
+    private:
