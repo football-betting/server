@@ -45,6 +45,8 @@ services:
             - default
             - api
             - tip
+        environment:
+            - APP_ENV=docker
 
     api-web:
         image: nginx:1.17.8-alpine
