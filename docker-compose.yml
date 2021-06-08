@@ -37,12 +37,16 @@ services:
             - api
 
     php-fpm:
-        image: registry.gitlab.nxs360.com/docker/php:7.4-fpm
+        build:
+            context: docker/php
+            args:
+                PUID: ${PUID}
         volumes:
             - ./em2021-api/:/data-api/
             - ./tips/:/data-tips/
         networks:
             - default
+            - private
             - api
             - tip
         environment:

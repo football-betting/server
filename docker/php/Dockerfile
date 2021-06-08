@@ -1,7 +1,5 @@
-FROM php:7.4-fpm-alpine
+FROM registry.gitlab.nxs360.com/docker/php:7.4-fpm
 
-ENV COMPOSER_ALLOW_SUPERUSER 1
-RUN echo "date.timezone=UTC" >> $PHP_INI_DIR/php.ini
+ARG PUID=0
 
-RUN docker-php-ext-install bcmath
-RUN curl -Ls https://getcomposer.org/composer.phar > /usr/local/bin/composer && chmod +x /usr/local/bin/composer
+USER ${PUID}
