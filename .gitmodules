@@ -18,3 +18,11 @@
 	path = frontend
 	url = git@github.com:football-betting/frontend.git
 	branch = master
+[submodule "calculation-list"]
+	path = calculation-list
+	url = git@github.com:football-betting/calculation-list.git
+	branch = master
+[submodule "ranking-list"]
+	path = ranking-list
+	url = git@github.com:football-betting/ranking-list.git
+	branch = master
