@@ -7,4 +7,5 @@ sleep 10
 
 docker-compose exec -T php-fpm bash -c "cd /data-api && bash init.sh" && \
 docker-compose exec -T php-fpm bash -c "cd /data-tips && composer install -o" && \
+docker-compose exec -T php-fpm bash -c "cd /data-match-api && composer install -o" && \
 docker-compose exec -T php-fpm bash -c "cd /data-match && composer install -o"
