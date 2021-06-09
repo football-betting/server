@@ -5,7 +5,7 @@ PUID=${UID} docker-compose -f docker-compose.yml -f docker-compose.local.yml up 
 for i in {1..5}
 do
    echo Trying to initialize API service. Attemp ${i}/5
-   docker-compose exec -T php-fpm bash -c "cd /data-api && bash init.sh" || sleep 10
+   docker-compose exec -T php-fpm bash -c "cd /data-api && bash init.sh" && break || sleep 10
 done
 
 docker-compose exec -T php-fpm bash -c "cd /data-tips && composer install -o" && \
