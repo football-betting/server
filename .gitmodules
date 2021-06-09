@@ -6,3 +6,15 @@
 	path = tips
 	url = git@github.com:football-betting/tips.git
 	branch = master
+[submodule "match-api"]
+	path = match-api
+	url = git@github.com:football-betting/match-api.git
+	branch = master
+[submodule "match"]
+	path = match
+	url = git@github.com:football-betting/match.git
+	branch = master
+[submodule "frontend"]
+	path = frontend
+	url = git@github.com:football-betting/frontend.git
+	branch = master
