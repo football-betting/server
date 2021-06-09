@@ -13,7 +13,7 @@
 [submodule "match"]
 	path = match
 	url = https://github.com/football-betting/match.git
-	branch = master
+	branch = main
 [submodule "frontend"]
 	path = frontend
 	url = https://github.com/football-betting/frontend.git
