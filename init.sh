@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-PUID=${UID} docker-compose -f docker-compose.yml -f docker-compose.local.yml up -d --build || exit ${?}
+if [ "${1}" == "" ]; then
+  PUID=${UID} docker-compose -f docker-compose.yml -f docker-compose.local.yml up -d --build || exit ${?}
+fi
 
 for i in {1..5}
 do
