@@ -1,20 +1,28 @@
 [submodule "em2021-api"]
 	path = em2021-api
-	url = git@github.com:football-betting/em2021-api.git
+	url = https://github.com/football-betting/em2021-api.git
 	branch = master
 [submodule "tips"]
 	path = tips
-	url = git@github.com:football-betting/tips.git
+	url = https://github.com/football-betting/tips.git
 	branch = master
 [submodule "match-api"]
 	path = match-api
-	url = git@github.com:football-betting/match-api.git
+	url = https://github.com/football-betting/match-api.git
 	branch = master
 [submodule "match"]
 	path = match
-	url = git@github.com:football-betting/match.git
-	branch = master
+	url = https://github.com/football-betting/match.git
+	branch = main
 [submodule "frontend"]
 	path = frontend
-	url = git@github.com:football-betting/frontend.git
+	url = https://github.com/football-betting/frontend.git
+	branch = master
+[submodule "calculation-list"]
+	path = calculation-list
+	url = https://github.com/football-betting/calculation-list.git
+	branch = master
+[submodule "ranking-list"]
+	path = ranking-list
+	url = https://github.com/football-betting/ranking-list.git
 	branch = master
