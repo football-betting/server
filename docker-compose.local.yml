@@ -6,3 +6,15 @@ services:
       - 8080:8080
       - 8081:8081
       - 8082:8082
+  rediscommander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOSTS=api:api-redis,tip:tip-redis
+    depends_on:
+      - api-redis
+      - tip-redis
+    networks:
+      - api
+      - tip
+    ports:
+      - 8083:8081
