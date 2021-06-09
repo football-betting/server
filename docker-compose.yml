@@ -34,6 +34,8 @@ services:
             - ./match/:/data-match/
             - ./match-api/:/data-match-api/
             - ./frontend/:/data-frontend/
+            - ./calculation-list/:/data-calculation-list/
+            - ./ranking-list/:/data-ranking-list/
         networks:
             - default
             - private
@@ -145,15 +147,63 @@ services:
         depends_on:
             - php-fpm
 
+    ranking-list-redis:
+        image: redis:6
+        command: redis-server --appendonly yes
+        volumes:
+            - redis-data-ranking-list:/data
+        networks:
+            - ranking-list
+
+    ranking-list-web:
+        image: nginx:1.17.8-alpine
+        volumes:
+            - ./ranking-list/:/data-ranking-list/
+            - ./docker/nginx/vhost-ranking-list.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            ranking-list:
+            private:
+                aliases:
+                    - web.ranking-list
+        depends_on:
+            - ranking-list-redis
+            - php-fpm
+
+    calculation-list-redis:
+        image: redis:6
+        command: redis-server --appendonly yes
+        volumes:
+            - redis-data-calculation-list:/data
+        networks:
+            - calculation-list
+
+    calculation-list-web:
+        image: nginx:1.17.8-alpine
+        volumes:
+            - ./calculation-list/:/data-calculation-list/
+            - ./docker/nginx/vhost-calculation-list.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            calculation-list:
+            private:
+                aliases:
+                    - web.calculation-list
+        depends_on:
+            - calculation-list-redis
+            - php-fpm
+
 volumes:
     rabbitmq-data:
     mysql-data:
     redis-data-api:
     redis-data-tip:
     redis-data-match:
+    redis-data-ranking-list:
+    redis-data-calculation-list:
 
 networks:
     api:
     tip:
     match:
+    ranking-list:
+    calculation-list:
     private:

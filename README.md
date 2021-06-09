@@ -16,5 +16,7 @@ You can access the apps now on
 |Match|http://localhost:8082|
 |Match Api|http://localhost:8083|
 |Frontend|http://localhost:8084|
-|Rabbit MQ Admin|http://localhost:8085|
-|Redis Commander|http://localhost:8086|
+|Ranking list|http://localhost:8085|
+|Calculation list|http://localhost:8086|
+|Rabbit MQ Admin|http://localhost:8088|
+|Redis Commander|http://localhost:8089|

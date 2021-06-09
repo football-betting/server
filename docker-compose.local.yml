@@ -9,10 +9,13 @@ services:
       - 8083:8083
       - 8084:8084
       - 8085:8085
+      - 8086:8086
+      - 8087:8087
+      - 8088:8088
   rediscommander:
     image: rediscommander/redis-commander:latest
     environment:
-      - REDIS_HOSTS=api:api-redis,tip:tip-redis,match:match-redis
+      - REDIS_HOSTS=api:api-redis,tip:tip-redis,match:match-redis,ranking-list:ranking-list-redis,calculation-list:calculation-list-redis
     depends_on:
       - api-redis
       - tip-redis
@@ -22,4 +25,4 @@ services:
       - tip
       - match
     ports:
-      - 8086:8081
+      - 8089:8081
