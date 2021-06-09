@@ -28,15 +28,21 @@ services:
             args:
                 PUID: ${PUID}
         volumes:
+            - ./.composer/:/.composer
             - ./em2021-api/:/data-api/
             - ./tips/:/data-tips/
+            - ./match/:/data-match/
+            - ./match-api/:/data-match-api/
         networks:
             - default
             - private
             - api
             - tip
+            - match
         environment:
             - APP_ENV=docker
+        depends_on:
+            - rabbitmq
 
     api-db:
         image: mysql:5.7
@@ -46,6 +52,7 @@ services:
             - mysql-data:/var/lib/mysql
         networks:
             - api
+
     api-redis:
         image: redis:6
         command: redis-server --appendonly yes
@@ -68,7 +75,6 @@ services:
             - api-db
             - api-redis
             - php-fpm
-            - rabbitmq
 
     tip-redis:
         image: redis:6
@@ -91,17 +97,38 @@ services:
         depends_on:
             - tip-redis
             - php-fpm
-            - rabbitmq
 
+    match-redis:
+        image: redis:6
+        command: redis-server --appendonly yes
+        volumes:
+            - redis-data-match:/data
+        networks:
+            - match
 
+    match-web:
+        image: nginx:1.17.8-alpine
+        volumes:
+            - ./match/:/data-match/
+            - ./docker/nginx/vhost-match.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            tip:
+            private:
+                aliases:
+                    - web.match
+        depends_on:
+            - match-redis
+            - php-fpm
 
 volumes:
     rabbitmq-data:
     mysql-data:
     redis-data-api:
     redis-data-tip:
+    redis-data-match:
 
 networks:
     api:
     tip:
+    match:
     private:

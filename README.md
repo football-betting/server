@@ -19,11 +19,17 @@ For the Tip Service
 docker-compose exec -T php-fpm bash -c "cd /data-tips && composer install -o"
 ```
 
+For the Match Service
+```bash
+docker-compose exec -T php-fpm bash -c "cd /data-match && composer install -o"
+```
+
 You can access the apps now on
 
 |App|Url|
 |---|---|
 |Api|http://localhost:8080|
 |Tip|http://localhost:8081|
-|Rabbit MQ Admin|http://localhost:8082|
-|Redis Commander|http://localhost:8083|
+|Match|http://localhost:8082|
+|Rabbit MQ Admin|http://localhost:8085|
+|Redis Commander|http://localhost:8086|
