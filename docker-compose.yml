@@ -21,6 +21,11 @@ services:
         depends_on:
             - api-web
             - tip-web
+            - frontend-web
+            - match-api-web
+            - match-web
+            - calculation-list-web
+            - ranking-list-web
 
     php-fpm:
         build:
