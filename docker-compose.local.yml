@@ -20,6 +20,8 @@ services:
       - api-redis
       - tip-redis
       - match-redis
+      - calculation-list-redis
+      - ranking-list-redis
     networks:
       - api
       - tip
