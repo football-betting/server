@@ -126,7 +126,7 @@ services:
     match-api-web:
         image: nginx:1.17.8-alpine
         volumes:
-            - ./match/:/data-match-api/
+            - ./match-api/:/data-match-api/
             - ./docker/nginx/vhost-match-api.conf:/etc/nginx/conf.d/default.conf
         networks:
             private:
@@ -138,7 +138,7 @@ services:
     frontend-web:
         image: nginx:1.17.8-alpine
         volumes:
-            - ./match/:/data-frontend/
+            - ./frontend/:/data-frontend/
             - ./docker/nginx/vhost-frontend.conf:/etc/nginx/conf.d/default.conf
         networks:
             private:
