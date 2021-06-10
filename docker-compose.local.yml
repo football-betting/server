@@ -26,5 +26,7 @@ services:
       - api
       - tip
       - match
+      - calculation-list
+      - ranking-list
     ports:
       - 8089:8081
