@@ -28,6 +28,7 @@ services:
             args:
                 PUID: ${PUID}
         volumes:
+            - ./docker/php/custom-ini.ini:/usr/local/etc/php/conf.d/99-custom-ini.ini
             - ./.composer/:/.composer
             - ./em2021-api/:/data-api/
             - ./tips/:/data-tips/
@@ -44,6 +45,8 @@ services:
             - match
         environment:
             - APP_ENV=docker
+            - PHP_MAX_EXECUTION_TIME=30
+            - PHP_MEMORY_LIMIT=128M
         depends_on:
             - rabbitmq
 
@@ -52,6 +55,7 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: admin
         volumes:
+            - ./docker/mysql/custom-my.cnf:/etc/mysql/conf.d/99-custom-my.cnf
             - mysql-data:/var/lib/mysql
         networks:
             - api
