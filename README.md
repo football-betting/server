@@ -15,3 +15,9 @@ You can access the apps now on
 |Frontend|http://localhost:8084|
 |Rabbit MQ Admin|http://localhost:8088|
 |Redis Commander|http://localhost:8089|
+
+## Command
+
+```
+git submodule update --recursive --remote
+```
