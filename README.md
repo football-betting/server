@@ -38,4 +38,5 @@ cd /data-ranking-list && php bin/console messenger:consume match.to.rating
 
 cd /data-api && php bin/console messenger:consume rating.to.app
 
+cd /data-tips && php bin/console messenger:consume app.to.tip
 ```
