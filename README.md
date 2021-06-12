@@ -27,8 +27,9 @@ docker-compose exec php-fpm bash
 ## CronJob
 
 ```
+cd /data-match-api && php bin/console football:matches
 
-cd data-match/ && php bin/console messenger:consume match.api.to.match
+cd /data-match/ && php bin/console messenger:consume match.api.to.match
 
 cd /data-calculation-list && php bin/console messenger:consume match.to.calculation
 cd /data-calculation-list && php bin/console messenger:consume tip.list.to.calculation
