@@ -20,4 +20,19 @@ You can access the apps now on
 
 ```
 git submodule update --recursive --remote
+docker-compose exec php-fpm bash
+```
+
+
+## CronJob
+
+```
+
+cd data-match/ && php bin/console messenger:consume match.api.to.match
+
+cd /data-calculation-list && php bin/console messenger:consume match.to.calculation
+cd /data-calculation-list && php bin/console messenger:consume tip.list.to.calculation
+
+
+
 ```
