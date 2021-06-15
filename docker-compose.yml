@@ -43,6 +43,8 @@ services:
             - api
             - tip
             - match
+            - ranking-list
+            - calculation-list
         environment:
             - APP_ENV=docker
             - PHP_MAX_EXECUTION_TIME=30
